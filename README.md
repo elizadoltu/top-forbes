@@ -1,4 +1,4 @@
-# **Forbes Billionaires Crawler**
+# **Forbes Billionaires Crawler (18)**
 
 Sa se creeze un crawler care sa preia informatiile de pe Forbes despre cei mai bogati 200 de oameni si sa stocheze informatii despre ei intr-o baza de date. De asemenea, sa se creeze un set de functii care sa interactioneze cu baza de date.
 

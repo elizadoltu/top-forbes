@@ -12,3 +12,4 @@ Sa se creeze un crawler care sa preia informatiile de pe Forbes despre cei mai b
 
 **INPUT:** `forbes.py`  
 **OUTPUT:** Un crawler care insereaza in baza de date informatii.  
+![image](https://github.com/user-attachments/assets/2b5bb5b3-85c7-43ae-aa06-9fbe45b80028)

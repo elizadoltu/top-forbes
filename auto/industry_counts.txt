@@ -1,0 +1,18 @@
+Industry: Technology, Count: 40
+Industry: Finance & Investments, Count: 32
+Industry: Fashion & Retail, Count: 30
+Industry: Food & Beverage, Count: 15
+Industry: Diversified, Count: 15
+Industry: Metals & Mining, Count: 12
+Industry: Automotive, Count: 10
+Industry: Energy, Count: 9
+Industry: Manufacturing, Count: 8
+Industry: Real Estate, Count: 8
+Industry: Healthcare, Count: 6
+Industry: Logistics, Count: 4
+Industry: Media & Entertainment, Count: 3
+Industry: Sports, Count: 3
+Industry: Gambling & Casinos, Count: 2
+Industry: Telecom, Count: 1
+Industry: Service, Count: 1
+Industry: Construction & Engineering, Count: 1

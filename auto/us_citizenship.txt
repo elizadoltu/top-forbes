@@ -1,2 +1,2 @@
-American Citizens: 116
-Non-American Citizens: 184
+American Citizens: 79
+Non-American Citizens: 121

@@ -14,7 +14,7 @@ def how_many_us_citizenship():
     billionaires = collection.find({})
     
     for billionaire in billionaires: 
-        citizenship = billionaire.get('Citizenship')
+        citizenship = billionaire.get('Country of Citizenship')
         if 'United States' in citizenship:
             american_citizens += 1
         else:

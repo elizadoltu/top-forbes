@@ -20,11 +20,8 @@ def get_top_10_youngest_billionaires():
                     f"Age: {billionaire.get('Age')}, "
                     f"Source Of Wealth: {billionaire.get('Source of Wealth')}, "
                     f"Net Worth: {billionaire.get('Net Worth')}, "
-                    f"Residence: {billionaire.get('Residence')}, "
-                    f"Citizenship: {billionaire.get('Citizenship')}, "
-                    f"Marital Status: {billionaire.get('Marital Status')}, "
-                    f"Children: {billionaire.get('Children')}, "
-                    f"Education: {billionaire.get('Education')}"
+                    f"City: {billionaire.get('City')}, "
+                    f"Citizenship: {billionaire.get('Country of Citizenship')}, "                   
                 )
             result.append(line)
 

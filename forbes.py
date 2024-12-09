@@ -23,30 +23,56 @@ def fetch_billionaire_data(page):
 
 def fetch_billionaire_profile_data(profile_uri):
     try:
-        if profile_uri.startswith('https://www.forbes.com/profile/'):
-            profile_uri = profile_uri.split('/profile/')[1].split('?')[0]  
         
-        profile_url = f"https://www.forbes.com/profile/{profile_uri}/?list=billionaires"
+        api_url = f"https://www.forbes.com/forbesapi/person/{profile_uri}.json"
+        print(f"Fetching profile from: {api_url}")
         
-        print(f"Fetching profile from: {profile_url}")
-        
-        response = requests.get(profile_url, headers={'User-Agent': 'Mozilla/5.0'})
+        response = requests.get(api_url, headers={'User-Agent': 'Mozilla/5.0'})
         
         if response.status_code == 200:
-            soup = BeautifulSoup(response.text, 'html.parser')
+            data = response.json() 
             
-            personal_stats = {}
-            stats_block = soup.find('div', class_='listuser-content__block person-stats')
-            if stats_block:
-                items = stats_block.find_all('dl', class_='listuser-block__item')
-                for item in items:
-                    title = item.find('dt', class_='profile-stats__title')
-                    value = item.find('dd', class_='profile-stats__text')
-                    if title and value:
-                        personal_stats[title.get_text(strip=True)] = value.get_text(strip=True)
-            return personal_stats
+            person_data = data.get('person', {})
+            person_lists = person_data.get('personLists', [])
+            
+            latest_entry = next((entry for entry in person_lists if entry.get('year') == 2024), None)
+            if not latest_entry:
+                latest_entry = max(person_lists, key=lambda x: x.get('year', 0), default=None)
+            
+            if latest_entry:
+                personal_stats = {
+                    "naturalId": latest_entry.get("naturalId"),
+                    "name": latest_entry.get("name"),
+                    "year": latest_entry.get("year"),
+                    "month": latest_entry.get("month"),
+                    "uri": latest_entry.get("uri"),
+                    "rank": latest_entry.get("rank"),
+                    "listUri": latest_entry.get("listUri"),
+                    "personName": latest_entry.get("personName"),
+                    "finalWorth": latest_entry.get("finalWorth"),
+                    "age": latest_entry.get("age"),
+                    "country": latest_entry.get("country"),
+                    "city": latest_entry.get("city"),
+                    "firstNames": latest_entry.get("firstName"),
+                    "lastName": latest_entry.get("lastName"),
+                    "title": latest_entry.get("title"),
+                    "source": latest_entry.get("source"),
+                    "industries": latest_entry.get("industries"),
+                    "bio": latest_entry.get("bios", []),
+                    "image": latest_entry.get("squareImage"),
+                    "organization": latest_entry.get("organization"),
+                    "birthdate": latest_entry.get("birthdate"),
+                    'squareImage': latest_entry.get('squareImage'),
+                    'bios': latest_entry.get('bios'),
+                    'status': latest_entry.get('status'),
+                    'countryOfCitizenship': latest_entry.get('countryOfCitizenship'),
+                }
+                return personal_stats
+            else:
+                print("No data available for the specified year.")
+                return None
         else:
-            print(f"Error fetching profile: {profile_url}, Status code: {response.status_code}")
+            print(f"Error fetching profile: {api_url}, Status code: {response.status_code}")
             return None
     except Exception as e:
         print(f"Error occurred: {e}")
@@ -55,7 +81,7 @@ def fetch_billionaire_profile_data(profile_uri):
 def crawl_forbes_billionaires():
     page = 1
     all_billionaires = []
-    max_billionaires = 300  
+    max_billionaires = 200  
 
     while len(all_billionaires) < max_billionaires:
         data = fetch_billionaire_data(page)
@@ -76,21 +102,31 @@ def crawl_forbes_billionaires():
             personal_data = fetch_billionaire_profile_data(profile_uri)
 
             billionaire = {
-                'rank': person.get('rank'),
-                'name': person.get('personName'),
-                'finalWorth': person.get('finalWorth'),
-                'age': person.get('age'),
-                'country': person.get('country'),
-                'source': person.get('source'),
-                'industries': person.get('industries'),
-                'organization': person.get('organization'),
-                'gender': person.get('gender'),
-                'firstName': person.get('firstName'),
-                'lastName': person.get('lastName'),
-                'squareImage': person.get('squareImage'),
-                'bios': person.get('bios'),
-                'status': person.get('status'),
-                'countryOfCitizenship': person.get('countryOfCitizenship'),
+                "naturalId": personal_data.get("naturalId"),
+                    "name": personal_data.get("name"),
+                    "year": personal_data.get("year"),
+                    "month": personal_data.get("month"),
+                    "uri": personal_data.get("uri"),
+                    "rank": personal_data.get("rank"),
+                    "listUri": personal_data.get("listUri"),
+                    "personName": personal_data.get("personName"),
+                    "finalWorth": personal_data.get("finalWorth"),
+                    "age": personal_data.get("age"),
+                    "country": personal_data.get("country"),
+                    "city": personal_data.get("city"),
+                    "firstNames": personal_data.get("firstNames"),
+                    "lastName": personal_data.get("lastName"),
+                    "title": personal_data.get("title"),
+                    "source": personal_data.get("source"),
+                    "industries": personal_data.get("industries"),
+                    "bio": personal_data.get("bios", []),
+                    "image": personal_data.get("squareImage"),
+                    "organization": personal_data.get("organization"),
+                    "birthdate": personal_data.get("birthdate"),
+                    'squareImage': personal_data.get('squareImage'),
+                    'bios': personal_data.get('bios'),
+                    'status': personal_data.get('status'),
+                    'countryOfCitizenship': personal_data.get('countryOfCitizenship'),
             }
 
             if personal_data:

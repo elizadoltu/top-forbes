@@ -45,12 +45,12 @@ def extract_billionaire_details(billionaire_data):
             'Last Name': billionaire.get('lastName'),
             'Age': billionaire.get('age'),
             'Net Worth': billionaire.get('finalWorth'),
-            'Source of Wealth': billionaire.get('Source of Wealth'),
-            'Residence': billionaire.get('Residence'),
-            'Citizenship': billionaire.get('Citizenship'),
-            'Marital Status': billionaire.get('Marital Status'),   
-            'Children': billionaire.get('Children'),
-            'Education': billionaire.get('Education'),
+            'Source of Wealth': billionaire.get('source'),
+            'City': billionaire.get('city'),
+            'Country of Citizenship': billionaire.get('countryOfCitizenship'),
+            'Status': billionaire.get('status'),   
+            'Title': billionaire.get('title'),
+            'Industry': billionaire.get('industries'),
         }
         exctracted_data.append(extracted_billionaire)
     
